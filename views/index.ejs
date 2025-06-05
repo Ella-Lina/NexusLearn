@@ -1,0 +1,29 @@
+<%- include('partials/header', { title: 'Home' }) %>
+<section aria-labelledby="welcome">
+  <section class="welcome-section">
+    <div class="welcome-overlay">
+      <h1 class="site-title" id="welcome">NexusLearn</h1>
+      <p class="welcome-intro">
+        Welcome to NexusLearn, your gateway to knowledge! Discover a wide range of courses, connect with expert instructors, and learn at your own pace. Whether you're exploring new skills or mastering a passion, we're here to help you grow anytime, anywhere.
+      </p>
+    </div>
+  </section>
+  <section aria-labelledby="courses">
+    <h2 id="courses">Featured Courses</h2>
+    <div class="card-container">
+      <% if (typeof courses !== 'undefined' && courses && courses.length > 0) { %>
+        <% courses.forEach(course => { %>
+          <article class="card animate-card">
+            <h3><%= course.name %></h3>
+            <p><strong>Instructor:</strong> <%= course.instructor %></p>
+            <p><strong>Duration:</strong> <%= course.duration %></p>
+            <p><%= course.description %></p>
+          </article>
+        <% }) %>
+      <% } else { %>
+        <p>No courses available at the moment.</p>
+      <% } %>
+    </div>
+  </section>
+</section>
+<%- include('partials/footer') %>

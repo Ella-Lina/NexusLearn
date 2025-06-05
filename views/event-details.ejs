@@ -1,0 +1,11 @@
+<%- include('partials/header', { title: 'Event Details' }) %>
+<section aria-labelledby="event-details">
+  <h2 id="event-details"><%= event.name %></h2>
+  <p><strong>Date:</strong> <%= event.date %></p>
+  <p><strong>Time:</strong> <%= event.time %></p>
+  <p><strong>Description:</strong> <%= event.description %></p>
+  <p><strong>Category:</strong> <%= event.category %></p>
+  <p><strong>Status:</strong> <%= event.is_past ? 'Past Event' : 'Upcoming Event' %></p>
+  <a href="/events">Back to Events</a>
+</section>
+<%- include('partials/footer') %>

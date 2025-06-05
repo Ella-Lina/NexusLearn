@@ -1,0 +1,27 @@
+<%- include('partials/header', { title: 'Quiz' }) %>
+<section aria-labelledby="quiz">
+  <h2 id="quiz">Coding Quiz for Kids</h2>
+  <div class="quiz-container">
+    <img src="/images/quiz-placeholder.jpg" alt="Coding quiz image" width="300" height="200">
+    <form id="quiz-form">
+      <p>1. What language is used for web page structure?</p>
+      <label><input type="radio" name="q1" value="HTML"> HTML</label>
+      <label><input type="radio" name="q1" value="CSS"> CSS</label>
+      <label><input type="radio" name="q1" value="JavaScript"> JavaScript</label>
+
+      <p>2. Which language is best for data analysis?</p>
+      <label><input type="radio" name="q2" value="Python"> Python</label>
+      <label><input type="radio" name="q2" value="Java"> Java</label>
+      <label><input type="radio" name="q2" value="C++"> C++</label>
+
+      <p>3. What do you build with React Native?</p>
+      <label><input type="radio" name="q3" value="App"> Mobile Apps</label>
+      <label><input type="radio" name="q3" value="Website"> Websites</label>
+      <label><input type="radio" name="q3" value="Game"> Games</label>
+
+      <button type="submit">Submit Answers</button>
+    </form>
+    <div id="quiz-result"></div>
+  </div>
+</section>
+<%- include('partials/footer') %>

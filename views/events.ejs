@@ -1,0 +1,74 @@
+<%- include('partials/header', { title: 'Events' }) %>
+
+<section class="events-section" aria-labelledby="events">
+  <h2 id="events">Events</h2>
+  <div class="filter-section">
+    <label for="yearFilter">Select Year:</label>
+    <select id="yearFilter" onchange="filterEvents()">
+      <option value="">All Years</option>
+      <% years.forEach(year => { %>
+        <option value="<%= year %>" <%= year == selectedYear ? 'selected' : '' %>><%= year %></option>
+      <% }) %>
+    </select>
+    <label for="categoryFilter">Category:</label>
+<select id="categoryFilter" onchange="filterEvents()">
+  <option value="">All Categories</option>
+  <option value="Concert">Concert</option>
+  <option value="Workshop">Workshop</option>
+  <option value="Trivia">Trivia</option>
+  <option value="Hackathon">Hackathon</option>
+  <option value="Seminar">Seminar</option>
+  <option value="Lecture">Lecture</option>
+  <option value="Q&A">Q&A</option>
+  <option value="Christmas">Christmas</option> <!-- Added -->
+</select>
+  </div>
+  <div id="eventsContainer">
+    <% if (events && events.length > 0) { %>
+      <% events.forEach(event => { %>
+        <div class="event-item">
+          <h3 class="event-title"><%= event.title %></h3>
+          <p class="event-date"><%= event.formattedDate %></p>
+          <p class="event-category"><%= event.category %></p>
+          <p class="event-description"><%= event.description %></p>
+          <p class="event-status">
+            <%= event.isUpcoming ? 'Upcoming' : 'Past' %>
+          </p>
+          <a href="/event/<%= event.id %>" class="event-link">Learn More</a>
+        </div>
+      <% }) %>
+    <% } else { %>
+      <p>No events found.</p>
+    <% } %>
+  </div>
+</section>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+  function filterEvents() {
+    const year = $('#yearFilter').val();
+    const category = $('#categoryFilter').val();
+    $.get('/api/events', { year, category }, (data) => {
+      $('#eventsContainer').html('');
+      if (data.length > 0) {
+        data.forEach(event => {
+          $('#eventsContainer').append(`
+            <div class="event-item">
+              <h3 class="event-title">${event.title}</h3>
+              <p class="event-date">${event.formattedDate}</p>
+              <p class="event-category">${event.category}</p>
+              <p class="event-description">${event.description}</p>
+              <p class="event-status">${event.isUpcoming ? 'Upcoming' : 'Past'}</p>
+              <a href="/event/${event.id}" class="event-link">Learn More</a>
+            </div>
+          `);
+        });
+      } else {
+        $('#eventsContainer').html('<p>No events found.</p>');
+      }
+    });
+  }
+  $(document).ready(() => filterEvents()); // Load events on page load
+</script>
+
+<%- include('partials/footer') %>

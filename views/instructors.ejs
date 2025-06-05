@@ -1,0 +1,19 @@
+<%- include('partials/header', { title: 'Instructors' }) %>
+<section aria-labelledby="instructors">
+  <h2 id="instructors">Our Instructors</h2>
+  <div class="card-container">
+    <% if (typeof instructors !== 'undefined' && instructors && instructors.length > 0) { %>
+      <% instructors.forEach(instructor => { %>
+        <article class="card instructor-card animate-card">
+          <img src="<%= instructor.image %>" alt="Photo of <%= instructor.name %>" class="instructor-image">
+          <h3><%= instructor.name %></h3>
+          <p><strong>Bio:</strong> <%= instructor.bio %></p>
+          <p><strong>Email:</strong> <a href="mailto:<%= instructor.email %>"><%= instructor.email %></a></p>
+        </article>
+      <% }) %>
+    <% } else { %>
+      <p>No instructors available at the moment.</p>
+    <% } %>
+  </div>
+</section>
+<%- include('partials/footer') %>

@@ -1,0 +1,13 @@
+<%- include('partials/header', { title: 'Courses' }) %>
+<section aria-labelledby="courses">
+  <h2 id="courses">Our Courses</h2>
+  <% courses.forEach(course => { %>
+    <div class="course-card">
+      <h3><%= course.name %></h3>
+      <p>Instructor: <%= course.instructor %></p>
+      <p>Duration: <%= course.duration %></p>
+      <p><%= course.description %></p>
+    </div>
+  <% }) %>
+</section>
+<%- include('partials/footer') %>
