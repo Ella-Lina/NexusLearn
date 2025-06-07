@@ -18,9 +18,7 @@ const coursesRoutes = require("./routes/courses");
 app.get("/", pageController.getHome);
 app.use("/courses", coursesRoutes);
 app.get("/instructors", instructorController.getInstructors);
-app.get("/schedule", eventController.getSchedule);
 app.get("/faq", pageController.getFAQ);
-
 
 const contactRoutes = require("./routes/contact");
 app.use("/contact", contactRoutes);
