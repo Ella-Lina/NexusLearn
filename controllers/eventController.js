@@ -1,13 +1,13 @@
 const { dbService } = require('../dbService');
 
 exports.getEvents = (req, res) => {
-  const year = req.query.year || new Date().getFullYear(); // Default to current year (2025)
+  const year = req.query.year || new Date().getFullYear(); 
   dbService.filterEvents(year, null, (err, events) => {
     if (err) {
       console.error('Error fetching events:', err);
       return res.status(500).send('Error loading events.');
     }
-    console.log('Fetched events:', events); // Debug log
+    console.log('Fetched events:', events); 
     const today = new Date();
     const eventsWithStatus = events.map(event => {
       const eventDate = new Date(event.date);
@@ -18,7 +18,6 @@ exports.getEvents = (req, res) => {
       };
     });
 
-    // Calculate available years from all events, not just filtered ones
     dbService.getEvents((err, allEvents) => {
       if (err) {
         console.error('Error fetching all events for years:', err);
@@ -29,7 +28,7 @@ exports.getEvents = (req, res) => {
         title: 'Events', 
         events: eventsWithStatus, 
         selectedYear: year,
-        years: years || [] // Ensure years is always an array
+        years: years || [] 
       });
     });
   });
@@ -84,8 +83,7 @@ exports.filterEvents = (req, res) => {
   });
 };
 
-// Helper function to get unique years from events
 function getAvailableYears(events) {
   const years = new Set(events.map(event => new Date(event.date).getFullYear()));
-  return Array.from(years).sort((a, b) => b - a); // Sort descending
+  return Array.from(years).sort((a, b) => b - a); 
 }

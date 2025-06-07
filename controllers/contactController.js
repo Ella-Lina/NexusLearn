@@ -2,17 +2,17 @@ const { dbService } = require('../dbService');
 
 function get(req, res) {
   const success = req.query.success === 'true' || false;
-  console.log('GET /contact - Success:', success); // Debugging log
+  console.log('GET /contact - Success:', success); 
   res.render("contact", { title: "Contact Us", success });
 }
 
 function post(req, res) {
   try {
     const { name, email, query } = req.body;
-    console.log('POST /contact - Received:', { name, email, query }); // Debugging log
+    console.log('POST /contact - Received:', { name, email, query }); 
 
     if (!name || !email || !query) {
-      console.log('POST /contact - Missing fields'); // Debugging log
+      console.log('POST /contact - Missing fields'); 
       return res.render("contact", {
         title: "Contact Us",
         success: false,
@@ -21,7 +21,7 @@ function post(req, res) {
     }
 
     const messageData = { name, email, message: query };
-    console.log('POST /contact - Saving message:', messageData); // Debugging log
+    console.log('POST /contact - Saving message:', messageData); 
     dbService.saveMessage(messageData, (err) => {
       if (err) {
         console.error('POST /contact - Error saving message:', err);
@@ -31,7 +31,7 @@ function post(req, res) {
           error: "Oops, something went wrong! Try again later.",
         });
       }
-      console.log('POST /contact - Message saved, redirecting'); // Debugging log
+      console.log('POST /contact - Message saved, redirecting'); 
       res.redirect("/contact?success=true");
     });
   } catch (err) {
