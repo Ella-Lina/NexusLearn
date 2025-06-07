@@ -23,24 +23,27 @@
   <option value="Christmas">Christmas</option> 
 </select>
   </div>
-  <div id="eventsContainer">
-    <% if (events && events.length > 0) { %>
-      <% events.forEach(event => { %>
-        <div class="event-item">
-          <h3 class="event-title"><%= event.title %></h3>
-          <p class="event-date"><%= event.formattedDate %></p>
-          <p class="event-category"><%= event.category %></p>
-          <p class="event-description"><%= event.description %></p>
-          <p class="event-status">
-            <%= event.isUpcoming ? 'Upcoming' : 'Past' %>
-          </p>
-          <a href="/event/<%= event.id %>" class="event-link">Learn More</a>
-        </div>
-      <% }) %>
-    <% } else { %>
-      <p>No events found.</p>
-    <% } %>
-  </div>
+  <div id="eventsContainer" class="event-grid">
+  <% if (events && events.length > 0) { %>
+    <% events.forEach(event => { %>
+      <div class="event-item">
+        <% if (event.image) { %>
+          <img src="<%= event.image %>" alt="<%= event.title %>" class="event-image">
+        <% } %>
+        <h3 class="event-title"><%= event.title %></h3>
+        <p class="event-date"><%= event.formattedDate %></p>
+        <p class="event-category"><%= event.category %></p>
+        <p class="event-description"><%= event.description %></p>
+        <span class="event-status <%= event.isUpcoming ? 'upcoming' : 'past' %>">
+          <%= event.isUpcoming ? 'Upcoming' : 'Past' %>
+        </span>
+        <a href="/event/<%= event.id %>" class="event-link">Learn More</a>
+      </div>
+    <% }) %>
+  <% } else { %>
+    <p>No events found.</p>
+  <% } %>
+</div>
 </section>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -49,16 +52,19 @@
     const year = $('#yearFilter').val();
     const category = $('#categoryFilter').val();
     $.get('/api/events', { year, category }, (data) => {
-      $('#eventsContainer').html('');
+      $('#eventsContainer').html(''); 
       if (data.length > 0) {
         data.forEach(event => {
           $('#eventsContainer').append(`
             <div class="event-item">
+              ${event.image ? `<img src="${event.image}" alt="${event.title}" class="event-image">` : ''}
               <h3 class="event-title">${event.title}</h3>
               <p class="event-date">${event.formattedDate}</p>
               <p class="event-category">${event.category}</p>
               <p class="event-description">${event.description}</p>
-              <p class="event-status">${event.isUpcoming ? 'Upcoming' : 'Past'}</p>
+              <span class="event-status ${event.isUpcoming ? 'upcoming' : 'past'}">
+                ${event.isUpcoming ? 'Upcoming' : 'Past'}
+              </span>
               <a href="/event/${event.id}" class="event-link">Learn More</a>
             </div>
           `);
@@ -68,7 +74,8 @@
       }
     });
   }
-  $(document).ready(() => filterEvents()); 
+
+  $(document).ready(() => filterEvents());
 </script>
 
 <%- include('partials/footer') %>

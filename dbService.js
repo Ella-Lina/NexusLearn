@@ -37,7 +37,8 @@ const db = new sqlite3.Database(dbPath, (err) => {
         title TEXT NOT NULL,
         date TEXT NOT NULL,
         category TEXT NOT NULL,
-        description TEXT NOT NULL
+        description TEXT NOT NULL,
+        image TEXT NOT NULL
       )
     `);
 
@@ -207,70 +208,82 @@ const db = new sqlite3.Database(dbPath, (err) => {
             "2025-05-01",
             "Q&A",
             "Ask questions live with instructors.",
+            "/images/events/qa.jpg",
           ],
           [
             "Guest Lecture",
             "2025-06-15",
             "Lecture",
             "Learn from industry experts.",
+            "/images/events/lecture.jpg",
           ],
           [
             "Concert: Tech Tunes",
             "2024-12-20",
             "Concert",
             "Enjoy tech-inspired music.",
+            "/images/events/concert.jpg",
           ],
           [
             "Coding Workshop",
             "2025-05-20",
             "Workshop",
             "Hands-on coding session for beginners.",
+            "/images/events/workshop.jpg",
           ],
           [
             "Tech Trivia Night",
             "2025-07-10",
             "Trivia",
             "Test your tech knowledge with fun trivia.",
+            "/images/events/trivia.jpg",
           ],
           [
             "Hackathon 2024",
             "2024-11-15",
             "Hackathon",
             "Compete in a 24-hour coding challenge.",
+            "/images/events/hackathon.jpg",
           ],
           [
             "AI Seminar",
             "2025-08-01",
             "Seminar",
             "Learn about artificial intelligence trends.",
+            "/images/events/ai.jpg",
           ],
           [
             "Summer Concert Series",
             "2025-07-15",
             "Concert",
             "Outdoor music event.",
+            "/images/events/summerconcert.jpg",
           ],
           [
             "Winter Coding Camp",
             "2023-12-10",
             "Workshop",
             "Coding for all ages.",
+            "/images/events/wintercamp.jpg",
           ],
           [
             "New Year’s Tech Party",
             "2024-01-01",
             "Concert",
             "Celebrate with tech demos.",
+            "/images/events/newyear.jpg",
           ],
           [
             "Christmas Tech Fest",
             "2024-12-24",
             "Christmas",
             "A festive tech showcase with holiday cheer!",
+            "/images/events/christmas.jpg",
           ],
         ];
+
         const stmt = db.prepare(
-          "INSERT INTO events (title, date, category, description) VALUES (?, ?, ?, ?)"
+          "INSERT INTO events (title, date, category, description, image) VALUES (?, ?, ?, ?, ?)"
         );
         events.forEach((event) => stmt.run(event));
         stmt.finalize();
