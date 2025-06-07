@@ -1,16 +1,19 @@
 <%- include('partials/header', { title: 'Contact Us' }) %>
 
-<section class="contact-section" aria-labelledby="contact">
-  <h2 id="contact">Contact Us</h2>
+<section class="contact-section">
+  <h2>Contact Us</h2>
   <form action="/contact" method="POST" class="contact-form">
-  <input type="text" name="name" placeholder="Your Name" required aria-label="Your Name">
-  <input type="email" name="email" placeholder="Your Email" required aria-label="Your Email">
-  <textarea name="query" placeholder="Your Message" required aria-label="Your Message"></textarea>
-  <button type="submit">Send Message</button>
-</form>
-  <% if (success) { %>
-    <p class="success-message">Thank you for your message! We'll get back to you soon.</p>
-  <% } %>
+    <label for="name">Name:</label>
+    <input type="text" name="name" id="name" required />
+
+    <label for="email">Email:</label>
+    <input type="email" name="email" id="email" required />
+
+    <label for="message">Message:</label>
+    <textarea name="message" id="message" rows="5" required></textarea>
+
+    <button type="submit">Send Message</button>
+  </form>
 </section>
 
 <%- include('partials/footer') %>
