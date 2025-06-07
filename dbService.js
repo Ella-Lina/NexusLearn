@@ -293,6 +293,22 @@ const db = new sqlite3.Database(dbPath, (err) => {
             "Can I contact instructors?",
             "Yes, instructor contact details are on the Instructors page.",
           ],
+          [
+            "What is the duration of each course?",
+            "Each course displays its duration clearly, ranging from 3 to 12 weeks.",
+          ],
+          [
+            "Do I get a certificate after completing a course?",
+            "Yes! Most of our courses offer a digital certificate upon completion.",
+          ],
+          [
+            "Can I access the courses on mobile?",
+            "Absolutely. NexusLearn is optimized for mobile and desktop devices.",
+          ],
+          [
+            "Are there any live sessions?",
+            "Yes, some courses offer live Q&A or webinars with instructors.",
+          ],
         ];
         const stmt = db.prepare(
           "INSERT INTO faqs (question, answer) VALUES (?, ?)"
@@ -306,15 +322,15 @@ const db = new sqlite3.Database(dbPath, (err) => {
 
 const dbService = {
   getCourses: (callback) => {
-  const sql = `
+    const sql = `
     SELECT courses.*, instructors.image AS instructorImage
     FROM courses
     JOIN instructors ON courses.instructor = instructors.name
   `;
-  db.all(sql, [], (err, rows) => {
-    callback(err, rows);
-  });
-},
+    db.all(sql, [], (err, rows) => {
+      callback(err, rows);
+    });
+  },
 
   searchCourses: (query, callback) => {
     const sql = "SELECT * FROM courses WHERE name LIKE ?";

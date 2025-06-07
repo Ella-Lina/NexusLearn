@@ -1,17 +1,25 @@
 <%- include('partials/header', { title: 'FAQ' }) %>
-<section aria-labelledby="faq">
-  <h2 id="faq">Frequently Asked Questions</h2>
+
+<section class="faq-section">
+  <h2>Frequently Asked Questions</h2>
   <div class="faq-container">
-    <% if (typeof faqs !== 'undefined' && faqs && faqs.length > 0) { %>
-      <% faqs.forEach(faq => { %>
-        <article class="faq-item animate-card">
-          <h3 class="faq-question"><%= faq.question %></h3>
-          <p class="faq-answer" style="display: none;"><%= faq.answer %></p>
-        </article>
-      <% }) %>
-    <% } else { %>
-      <p>No FAQs available at the moment.</p>
-    <% } %>
+    <% faqs.forEach(faq => { %>
+    <div class="faq-card">
+      <button class="faq-question"><%= faq.question %></button>
+      <div class="faq-answer">
+        <p><%= faq.answer %></p>
+      </div>
+    </div>
+    <% }) %>
   </div>
 </section>
+<script>
+  document.querySelectorAll(".faq-question").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const card = btn.parentElement;
+      card.classList.toggle("active");
+    });
+  });
+</script>
+
 <%- include('partials/footer') %>
