@@ -11,14 +11,15 @@ const db = new sqlite3.Database(dbPath, (err) => {
 
   db.serialize(() => {
     db.run(`
-      CREATE TABLE IF NOT EXISTS courses (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        name TEXT NOT NULL,
-        instructor TEXT NOT NULL,
-        duration TEXT NOT NULL,
-        description TEXT NOT NULL
-      )
-    `);
+  CREATE TABLE IF NOT EXISTS courses (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT NOT NULL,
+    instructor TEXT NOT NULL,
+    duration TEXT NOT NULL,
+    description TEXT NOT NULL,
+    image TEXT NOT NULL
+  )
+`);
 
     db.run(`
       CREATE TABLE IF NOT EXISTS instructors (
@@ -76,22 +77,60 @@ const db = new sqlite3.Database(dbPath, (err) => {
             "Dr. Alice Smith",
             "8 weeks",
             "Learn HTML, CSS, and JavaScript.",
+            "/images/courses/webdev.jpg",
           ],
           [
             "Data Science with Python",
             "Prof. Marcus Lin",
             "10 weeks",
             "Master data analysis with Python.",
+            "/images/courses/python.jpg",
           ],
           [
             "Mobile App Development",
             "Ms. Clara Lee",
             "12 weeks",
             "Build apps with React Native.",
+            "/images/courses/mobile.jpg",
+          ],
+          [
+            "JavaScript Essentials",
+            "Jane Doe",
+            "6 weeks",
+            "Learn the fundamentals of JavaScript including syntax, loops, and DOM manipulation.",
+            "/images/courses/javascript.jpg",
+          ],
+          [
+            "Data Analysis with Excel",
+            "Kevin White",
+            "3 weeks",
+            "Master formulas, pivot tables, and data visualization using Excel.",
+            "/images/courses/excel.jpg",
+          ],
+          [
+            "Cybersecurity Basics",
+            "Mia Lin",
+            "7 weeks",
+            "Understand the core principles of securing systems, data, and networks.",
+            "/images/courses/cybersecurity.jpg",
+          ],
+          [
+            "Full Stack JavaScript",
+            "Nina Zhang",
+            "10 weeks",
+            "Go beyond the basics with Node.js, Express, MongoDB, and frontend frameworks.",
+            "/images/courses/fullstack.jpg",
+          ],
+          [
+            "UI/UX Design Principles",
+            "Emily Rivera",
+            "6 weeks",
+            "Design intuitive and user-friendly interfaces using tools like Figma and Adobe XD.",
+            "/images/courses/uiux.jpg",
           ],
         ];
         const stmt = db.prepare(
-          "INSERT INTO courses (name, instructor, duration, description) VALUES (?, ?, ?, ?)"
+          "INSERT INTO courses (name, instructor, duration, description, image) VALUES (?, ?, ?, ?, ?)"
         );
         courses.forEach((course) => stmt.run(course));
         stmt.finalize();
@@ -112,13 +151,43 @@ const db = new sqlite3.Database(dbPath, (err) => {
             "Prof. Marcus Lin",
             "Data science guru with 20 years experience.",
             "marcus@nexuslearn.com",
-            "/images/instructors/bob.jpg",
+            "/images/instructors/marcus.jpg",
           ],
           [
             "Ms. Clara Lee",
             "Mobile app specialist.",
             "clara@nexuslearn.com",
             "/images/instructors/clara.jpg",
+          ],
+          [
+            "Jane Doe",
+            "Front-end developer and JavaScript enthusiast.",
+            "jane@nexuslearn.com",
+            "/images/instructors/jane.jpg",
+          ],
+          [
+            "Kevin White",
+            "Excel power user and corporate trainer.",
+            "kevin@nexuslearn.com",
+            "/images/instructors/kevin.jpg",
+          ],
+          [
+            "Mia Lin",
+            "Cybersecurity analyst with hands-on experience.",
+            "mia@nexuslearn.com",
+            "/images/instructors/mia.jpg",
+          ],
+          [
+            "Nina Zhang",
+            "Full-stack JS expert with startup experience.",
+            "nina@nexuslearn.com",
+            "/images/instructors/nina.jpg",
+          ],
+          [
+            "Emily Rivera",
+            "UX/UI designer passionate about usability.",
+            "emily@nexuslearn.com",
+            "/images/instructors/emily.jpg",
           ],
         ];
         const stmt = db.prepare(
@@ -129,29 +198,84 @@ const db = new sqlite3.Database(dbPath, (err) => {
       }
     });
 
-db.get("SELECT COUNT(*) as count FROM events", (err, row) => {
-  if (err) console.error("Error checking events table:", err);
-  if (row.count === 0) {
-    const events = [
-      ["Live Q&A", "2025-05-01", "Q&A", "Ask questions live with instructors."],
-      ["Guest Lecture", "2025-06-15", "Lecture", "Learn from industry experts."],
-      ["Concert: Tech Tunes", "2024-12-20", "Concert", "Enjoy tech-inspired music."],
-      ["Coding Workshop", "2025-05-20", "Workshop", "Hands-on coding session for beginners."],
-      ["Tech Trivia Night", "2025-07-10", "Trivia", "Test your tech knowledge with fun trivia."],
-      ["Hackathon 2024", "2024-11-15", "Hackathon", "Compete in a 24-hour coding challenge."],
-      ["AI Seminar", "2025-08-01", "Seminar", "Learn about artificial intelligence trends."],
-      ["Summer Concert Series", "2025-07-15", "Concert", "Outdoor music event."],
-      ["Winter Coding Camp", "2023-12-10", "Workshop", "Coding for all ages."],
-      ["New Year’s Tech Party", "2024-01-01", "Concert", "Celebrate with tech demos."],
-      ["Christmas Tech Fest", "2024-12-24", "Christmas", "A festive tech showcase with holiday cheer!"]
-    ];
-    const stmt = db.prepare(
-      "INSERT INTO events (title, date, category, description) VALUES (?, ?, ?, ?)"
-    );
-    events.forEach((event) => stmt.run(event));
-    stmt.finalize();
-  }
-});
+    db.get("SELECT COUNT(*) as count FROM events", (err, row) => {
+      if (err) console.error("Error checking events table:", err);
+      if (row.count === 0) {
+        const events = [
+          [
+            "Live Q&A",
+            "2025-05-01",
+            "Q&A",
+            "Ask questions live with instructors.",
+          ],
+          [
+            "Guest Lecture",
+            "2025-06-15",
+            "Lecture",
+            "Learn from industry experts.",
+          ],
+          [
+            "Concert: Tech Tunes",
+            "2024-12-20",
+            "Concert",
+            "Enjoy tech-inspired music.",
+          ],
+          [
+            "Coding Workshop",
+            "2025-05-20",
+            "Workshop",
+            "Hands-on coding session for beginners.",
+          ],
+          [
+            "Tech Trivia Night",
+            "2025-07-10",
+            "Trivia",
+            "Test your tech knowledge with fun trivia.",
+          ],
+          [
+            "Hackathon 2024",
+            "2024-11-15",
+            "Hackathon",
+            "Compete in a 24-hour coding challenge.",
+          ],
+          [
+            "AI Seminar",
+            "2025-08-01",
+            "Seminar",
+            "Learn about artificial intelligence trends.",
+          ],
+          [
+            "Summer Concert Series",
+            "2025-07-15",
+            "Concert",
+            "Outdoor music event.",
+          ],
+          [
+            "Winter Coding Camp",
+            "2023-12-10",
+            "Workshop",
+            "Coding for all ages.",
+          ],
+          [
+            "New Year’s Tech Party",
+            "2024-01-01",
+            "Concert",
+            "Celebrate with tech demos.",
+          ],
+          [
+            "Christmas Tech Fest",
+            "2024-12-24",
+            "Christmas",
+            "A festive tech showcase with holiday cheer!",
+          ],
+        ];
+        const stmt = db.prepare(
+          "INSERT INTO events (title, date, category, description) VALUES (?, ?, ?, ?)"
+        );
+        events.forEach((event) => stmt.run(event));
+        stmt.finalize();
+      }
+    });
 
     db.get("SELECT COUNT(*) as count FROM faqs", (err, row) => {
       if (err) console.error("Error checking faqs table:", err);
@@ -182,10 +306,15 @@ db.get("SELECT COUNT(*) as count FROM events", (err, row) => {
 
 const dbService = {
   getCourses: (callback) => {
-    db.all("SELECT * FROM courses", [], (err, rows) => {
-      callback(err, rows);
-    });
-  },
+  const sql = `
+    SELECT courses.*, instructors.image AS instructorImage
+    FROM courses
+    JOIN instructors ON courses.instructor = instructors.name
+  `;
+  db.all(sql, [], (err, rows) => {
+    callback(err, rows);
+  });
+},
 
   searchCourses: (query, callback) => {
     const sql = "SELECT * FROM courses WHERE name LIKE ?";

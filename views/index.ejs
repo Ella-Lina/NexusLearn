@@ -17,17 +17,26 @@
   <section aria-labelledby="courses">
     <h2 id="courses">Featured Courses</h2>
     <div class="card-container">
-      <% if (typeof courses !== 'undefined' && courses && courses.length > 0) {
-      %> <% courses.forEach(course => { %>
-      <article class="card animate-card">
-        <h3><%= course.name %></h3>
-        <p><strong>Instructor:</strong> <%= course.instructor %></p>
-        <p><strong>Duration:</strong> <%= course.duration %></p>
-        <p><%= course.description %></p>
-      </article>
-      <% }) %> <% } else { %>
-      <p>No courses available at the moment.</p>
-      <% } %>
+      <% courses.forEach(course => { %>
+      <div class="flip-card">
+        <div class="flip-card-inner">
+          <div class="flip-card-front">
+            <img src="<%= course.image %>" alt="<%= course.name %>" />
+            <h3><%= course.name %></h3>
+          </div>
+          <div class="flip-card-back">
+            <img
+              src="<%= course.instructorImage || '/images/instructors/default.jpg' %>"
+              alt="<%= course.instructor %>"
+              class="instructor-image-static"
+            />
+            <h3><%= course.instructor %></h3>
+            <p><strong>Duration:</strong> <%= course.duration %></p>
+            <p><%= course.description %></p>
+          </div>
+        </div>
+      </div>
+      <% }) %>
     </div>
   </section>
 </section>

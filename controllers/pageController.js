@@ -5,10 +5,11 @@ function getHome(req, res) {
     if (err) {
       return res.status(500).send("Database error");
     }
-    res.render("index", { courses });
+
+    const featuredCourses = courses.slice(0, 3);
+    res.render("index", { courses: featuredCourses });
   });
 }
-
 function getFAQ(req, res) {
   dbService.getFAQs((err, faqs) => {
     if (err) {
