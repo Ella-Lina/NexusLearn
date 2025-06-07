@@ -2,26 +2,151 @@
 <section aria-labelledby="quiz">
   <h2 id="quiz">Coding Quiz for Kids</h2>
   <div class="quiz-container">
-    <img src="/images/quiz-placeholder.jpg" alt="Coding quiz image" width="300" height="200">
+    <img
+      src="/images/quiz-placeholder.jpg"
+      alt="Coding quiz image"
+      width="300"
+      height="200"
+    />
     <form id="quiz-form">
-      <p>1. What language is used for web page structure?</p>
-      <label><input type="radio" name="q1" value="HTML"> HTML</label>
-      <label><input type="radio" name="q1" value="CSS"> CSS</label>
-      <label><input type="radio" name="q1" value="JavaScript"> JavaScript</label>
+      <div class="quiz-question">
+        <p>1. What language is used for web page structure?</p>
+        <label><input type="radio" name="q1" value="HTML" /> HTML</label>
+        <label><input type="radio" name="q1" value="CSS" /> CSS</label>
+        <label
+          ><input type="radio" name="q1" value="JavaScript" /> JavaScript</label
+        >
+      </div>
 
-      <p>2. Which language is best for data analysis?</p>
-      <label><input type="radio" name="q2" value="Python"> Python</label>
-      <label><input type="radio" name="q2" value="Java"> Java</label>
-      <label><input type="radio" name="q2" value="C++"> C++</label>
+      <div class="quiz-question">
+        <p>2. Which language is best for data analysis?</p>
+        <label><input type="radio" name="q2" value="Python" /> Python</label>
+        <label><input type="radio" name="q2" value="Java" /> Java</label>
+        <label><input type="radio" name="q2" value="C++" /> C++</label>
+      </div>
 
-      <p>3. What do you build with React Native?</p>
-      <label><input type="radio" name="q3" value="App"> Mobile Apps</label>
-      <label><input type="radio" name="q3" value="Website"> Websites</label>
-      <label><input type="radio" name="q3" value="Game"> Games</label>
+      <div class="quiz-question">
+        <p>3. What do you build with React Native?</p>
+        <label
+          ><input type="radio" name="q3" value="Mobile Apps" /> Mobile
+          Apps</label
+        >
+        <label
+          ><input type="radio" name="q3" value="Websites" /> Websites</label
+        >
+        <label><input type="radio" name="q3" value="Games" /> Games</label>
+      </div>
+
+      <div class="quiz-question">
+        <p>4. What is the file extension for JavaScript files?</p>
+        <label><input type="radio" name="q4" value=".js" /> .js</label>
+        <label><input type="radio" name="q4" value=".java" /> .java</label>
+        <label><input type="radio" name="q4" value=".py" /> .py</label>
+      </div>
+
+      <div class="quiz-question">
+        <p>5. What does CSS stand for?</p>
+        <label
+          ><input type="radio" name="q5" value="Creative Style System" />
+          Creative Style System</label
+        >
+        <label
+          ><input type="radio" name="q5" value="Computer Style Sheet" />
+          Computer Style Sheet</label
+        >
+        <label
+          ><input type="radio" name="q5" value="Cascading Style Sheets" />
+          Cascading Style Sheets</label
+        >
+      </div>
+
+      <div class="quiz-question">
+        <p>6. Which one is a version control system?</p>
+        <label><input type="radio" name="q6" value="Git" /> Git</label>
+        <label><input type="radio" name="q6" value="FTP" /> FTP</label>
+        <label><input type="radio" name="q6" value="HTTP" /> HTTP</label>
+      </div>
+
+      <div class="quiz-question">
+        <p>7. What symbol starts a comment in JavaScript?</p>
+        <label><input type="radio" name="q7" value="//" /> //</label>
+        <label><input type="radio" name="q7" value="<!--" /> &lt;!--</label>
+        <label><input type="radio" name="q7" value="#" /> #</label>
+      </div>
+
+      <div class="quiz-question">
+        <p>8. What does a browser do with HTML?</p>
+        <label
+          ><input type="radio" name="q8" value="Displays it" /> Displays
+          it</label
+        >
+        <label
+          ><input type="radio" name="q8" value="Compiles it" /> Compiles
+          it</label
+        >
+        <label
+          ><input type="radio" name="q8" value="Encrypts it" /> Encrypts
+          it</label
+        >
+      </div>
 
       <button type="submit">Submit Answers</button>
     </form>
+
     <div id="quiz-result"></div>
   </div>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      document
+        .getElementById("quiz-form")
+        .addEventListener("submit", function (e) {
+          e.preventDefault();
+
+          const answers = {
+            q1: "HTML",
+            q2: "Python",
+            q3: "Mobile Apps",
+            q4: ".js",
+            q5: "Cascading Style Sheets",
+            q6: "Git",
+            q7: "//",
+            q8: "Displays it",
+          };
+
+          let score = 0;
+          let total = Object.keys(answers).length;
+
+          for (let key in answers) {
+            const selected = document.querySelector(
+              `input[name="${key}"]:checked`
+            );
+            if (selected && selected.value === answers[key]) {
+              score++;
+            }
+          }
+
+          const percentage = Math.round((score / total) * 100);
+          let message = "";
+
+          if (score === total) {
+            message = "🎉 Perfect! You're a coding superstar!";
+          } else if (score >= total * 0.75) {
+            message = "👍 Great job! You're learning fast!";
+          } else if (score >= total * 0.5) {
+            message = "🙂 Not bad! Keep practicing!";
+          } else {
+            message = "🧐 Keep going! Try reviewing the material again.";
+          }
+
+          const result = document.getElementById("quiz-result");
+          result.innerHTML = `
+        <div class="result-card">
+          <h3 class="result-score">Your Score: ${score}/${total} (${percentage}%)</h3>
+          <p class="result-message">${message}</p>
+        </div>
+      `;
+        });
+    });
+  </script>
 </section>
 <%- include('partials/footer') %>
