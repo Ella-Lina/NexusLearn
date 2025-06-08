@@ -1,17 +1,16 @@
 <%- include('partials/header', { title: 'Home' }) %>
 <section aria-labelledby="welcome">
-  <section class="welcome-section">
-    <div class="welcome-overlay">
-      <h1 class="site-title" id="welcome">NexusLearn</h1>
-      <div class="hero-image">
-        <img src="/images/cube.jpg" alt="NexusLearn Banner" />
-      </div>
-      <p class="welcome-intro">
+  <section class="hero-landscape">
+    <img src="/images/cube.jpg" alt="Hero Image" class="hero-image" />
+    <div class="hero-overlay">
+      <h1>NexusLearn</h1>
+      <p>
         Welcome to NexusLearn, your gateway to knowledge! Discover a wide range
         of courses, connect with expert instructors, and learn at your own pace.
-        Whether you're exploring new skills or mastering a passion, we're here
-        to help you grow anytime, anywhere.
       </p>
+      <form action="/courses" method="GET" class="hero-search">
+        <input type="text" name="q" placeholder="Search courses..." />
+      </form>
     </div>
   </section>
   <section aria-labelledby="courses">
