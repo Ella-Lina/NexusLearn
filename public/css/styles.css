@@ -505,7 +505,7 @@ footer {
   line-height: 1.5em;
   text-align: center;
   overflow: hidden;
-  margin-top: 0.5rem; 
+  margin-top: 0.5rem;
 }
 
 .flip-card-front img {
@@ -709,17 +709,21 @@ footer {
 
 .event-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 2rem;
-  margin-top: 2rem;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
 }
 
 .event-item {
-  background: white;
-  border-radius: 12px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.06);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%; /* If using grid */
+  min-height: 420px;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
   padding: 1rem;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .event-item:hover {

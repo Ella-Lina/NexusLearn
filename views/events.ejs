@@ -51,7 +51,7 @@
   function filterEvents() {
     const year = $('#yearFilter').val();
     const category = $('#categoryFilter').val();
-    $.get('/api/events', { year, category }, (data) => {
+    $.get('/events/filter', { year, category }, (data) => {
       $('#eventsContainer').html(''); 
       if (data.length > 0) {
         data.forEach(event => {

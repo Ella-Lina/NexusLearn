@@ -2,6 +2,20 @@
 
 <section class="contact-section">
   <h2>Contact Us</h2>
+
+  <% if (success) { %>
+  <div class="result-card">
+    <p class="result-message"><%= success %></p>
+  </div>
+  <% } %> <% if (error) { %>
+  <div
+    class="result-card"
+    style="border-left-color: #f87171; background: #fef2f2"
+  >
+    <p class="result-message" style="color: #991b1b"><%= error %></p>
+  </div>
+  <% } %>
+
   <form action="/contact" method="POST" class="contact-form">
     <label for="name">Name:</label>
     <input type="text" name="name" id="name" required />
@@ -15,5 +29,4 @@
     <button type="submit">Send Message</button>
   </form>
 </section>
-
 <%- include('partials/footer') %>

@@ -1,10 +1,9 @@
-const express = require("express");
-const courseController = require("../controllers/courseController");
+import express from "express";
+import { getCourses, searchCourses } from "../controllers/courseController.mjs";
 
 const router = express.Router();
 
-router.get("/", courseController.getCourses);
+router.get("/", getCourses);
+router.get("/search", searchCourses);
 
-router.get("/all", courseController.searchCourses);
-
-module.exports = router;
+export default router;

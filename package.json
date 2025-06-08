@@ -1,10 +1,11 @@
 {
   "name": "nexuslearn",
   "version": "1.0.0",
+  "type": "module",
   "description": "Online learning platform",
   "main": "server.js",
   "scripts": {
-    "start": "nodemon server.js"
+    "start": "node index.mjs"
   },
   "dependencies": {
     "ejs": "^3.1.10",
